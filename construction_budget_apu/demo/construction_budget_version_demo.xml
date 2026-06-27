@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_budget_version_1" model="construction.budget.version">
+        <field name="budget_id" ref="demo_budget" />
+        <field name="version_number">1</field>
+        <field name="name">Initial Version</field>
+        <field name="state">draft</field>
+    </record>
+</odoo>

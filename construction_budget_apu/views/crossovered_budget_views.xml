@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crossovered_budget_view_form_inherit_construction" model="ir.ui.view">
+        <field name="name">crossovered.budget.form.construction</field>
+        <field name="model">crossovered.budget</field>
+        <field
+            name="inherit_id"
+            ref="account_budget_oca.crossovered_budget_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="before">
+                <group string="Construction" invisible="not construction_budget_id">
+                    <field name="construction_budget_id" readonly="1" />
+                    <field name="construction_budget_version_id" readonly="1" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="construction_budget_line_view_list" model="ir.ui.view">
+        <field name="name">construction.budget.line.list</field>
+        <field name="model">construction.budget.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="chapter_id" />
+                <field name="code" />
+                <field name="name" />
+                <field name="quantity" />
+                <field name="uom_id" />
+                <field name="unit_price" />
+                <field name="subtotal" sum="Total" />
+            </list>
+        </field>
+    </record>
+
+    <record id="construction_budget_line_view_form" model="ir.ui.view">
+        <field name="name">construction.budget.line.form</field>
+        <field name="model">construction.budget.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="version_id" />
+                            <field name="chapter_id" />
+                            <field name="code" />
+                            <field name="name" />
+                            <field name="product_id" />
+                        </group>
+                        <group>
+                            <field name="quantity" />
+                            <field name="uom_id" />
+                            <field name="apu_mode" />
+                            <field name="unit_price" readonly="apu_mode" />
+                            <field name="subtotal" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" colspan="2" />
+                    </group>
+                    <group string="APU" invisible="not apu_id">
+                        <field name="apu_id" readonly="1" />
+                        <button
+                            name="action_open_apu"
+                            type="object"
+                            string="Open APU"
+                            class="btn-link"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

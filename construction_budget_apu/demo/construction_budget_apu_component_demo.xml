@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_apu_component_labor" model="construction.budget.apu.component">
+        <field name="apu_id" ref="demo_apu_excavation" />
+        <field name="name">Operator</field>
+        <field name="component_type">labor</field>
+        <field name="quantity">8</field>
+        <field name="unit_cost">25</field>
+    </record>
+
+    <record id="demo_apu_component_equipment" model="construction.budget.apu.component">
+        <field name="apu_id" ref="demo_apu_excavation" />
+        <field name="name">Backhoe rental</field>
+        <field name="component_type">equipment</field>
+        <field name="quantity">1</field>
+        <field name="unit_cost">120</field>
+    </record>
+</odoo>

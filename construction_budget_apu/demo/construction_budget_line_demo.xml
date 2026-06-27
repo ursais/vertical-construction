@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_line_excavation" model="construction.budget.line">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="chapter_id" ref="demo_chapter_earthworks" />
+        <field name="code">01.01</field>
+        <field name="name">Excavation and removal</field>
+        <field name="quantity">100</field>
+        <field name="apu_id" ref="demo_apu_excavation" />
+    </record>
+
+    <record id="demo_line_concrete" model="construction.budget.line">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="chapter_id" ref="demo_chapter_structure" />
+        <field name="code">02.01</field>
+        <field name="name">Concrete foundation</field>
+        <field name="quantity">50</field>
+        <field name="apu_mode">False</field>
+        <field name="unit_price">180</field>
+    </record>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="construction_budget_chapter_view_list" model="ir.ui.view">
+        <field name="name">construction.budget.chapter.list</field>
+        <field name="model">construction.budget.chapter</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle" />
+                <field name="code" />
+                <field name="name" />
+                <field name="budget_post_id" />
+                <field name="version_id" />
+                <field name="parent_id" />
+                <field name="line_count" />
+                <field name="amount_total" sum="Total" />
+            </list>
+        </field>
+    </record>
+
+    <record id="construction_budget_chapter_view_form" model="ir.ui.view">
+        <field name="name">construction.budget.chapter.form</field>
+        <field name="model">construction.budget.chapter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="version_id" />
+                        <field
+                            name="parent_id"
+                            domain="[('version_id', '=', version_id), ('id', '!=', id)]"
+                        />
+                        <field name="code" />
+                        <field name="name" />
+                        <field name="budget_post_id" />
+                        <field name="sequence" />
+                        <field name="amount_total" />
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle" />
+                            <field name="code" />
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="uom_id" />
+                            <field name="unit_price" />
+                            <field name="subtotal" sum="Total" />
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

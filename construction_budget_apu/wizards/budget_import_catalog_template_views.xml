@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="construction_budget_import_catalog_template_view_form"
+        model="ir.ui.view"
+    >
+        <field name="name">construction.budget.import.catalog.template.form</field>
+        <field name="model">construction.budget.import.catalog.template</field>
+        <field name="arch" type="xml">
+            <form string="Import Catalog Templates">
+                <group>
+                    <field name="version_id" />
+                    <field name="chapter_id" />
+                    <field name="catalog_version_id" />
+                    <field name="template_ids" widget="many2many_tags" />
+                </group>
+                <footer>
+                    <button
+                        name="action_import"
+                        type="object"
+                        string="Import"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
