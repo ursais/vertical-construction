@@ -13,7 +13,6 @@
         "purchase",
         "report_xlsx",
         "auditlog",
-        "web_export_view",
     ],
     "data": [
         "security/construction_catalog_security.xml",
@@ -32,7 +31,14 @@
         "wizards/catalog_version_copy_views.xml",
     ],
     "demo": [
-        "demo/construction_catalog_demo.xml",
+        "demo/construction_catalog_version_demo.xml",
+        "demo/construction_catalog_concept_demo.xml",
+        "demo/construction_catalog_input_demo.xml",
+        "demo/construction_catalog_crew_demo.xml",
+        "demo/construction_catalog_crew_line_demo.xml",
+        "demo/construction_catalog_yield_demo.xml",
+        "demo/construction_catalog_template_demo.xml",
+        "demo/construction_catalog_template_line_demo.xml",
     ],
     "application": True,
     "installable": True,

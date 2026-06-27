@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_catalog_concept_masonry" model="construction.catalog.concept">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">CON-001</field>
+        <field name="name">Masonry wall m2</field>
+        <field name="uom_id" ref="uom.uom_square_meter"/>
+    </record>
+</odoo>
