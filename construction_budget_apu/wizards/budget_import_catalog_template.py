@@ -24,6 +24,9 @@ class ConstructionBudgetImportCatalogTemplate(models.TransientModel):
     )
     template_ids = fields.Many2many(
         "construction.catalog.template",
+        relation="cbudget_import_catalog_tpl_rel",
+        column1="wizard_id",
+        column2="template_id",
         string="Templates",
         domain="[('catalog_version_id', '=', catalog_version_id)]",
     )
