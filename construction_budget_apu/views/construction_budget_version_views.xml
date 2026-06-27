@@ -60,6 +60,12 @@
                         groups="construction_budget_apu.group_construction_budget_manager"
                     />
                     <button
+                        name="action_import_catalog_templates"
+                        string="Import Catalog"
+                        type="object"
+                        invisible="is_frozen"
+                    />
+                    <button
                         name="action_reset_draft"
                         string="Reset to Draft"
                         type="object"
@@ -152,6 +158,7 @@
                                     <field name="quantity" />
                                     <field name="uom_id" />
                                     <field name="apu_mode" />
+                                    <field name="catalog_template_id" optional="hide" />
                                     <field name="unit_price" />
                                     <field name="subtotal" sum="Total" />
                                     <button

@@ -371,6 +371,7 @@ class ConstructionBudgetVersion(models.Model):
         for version in self:
             if version.state != "approved":
                 raise UserError(self.env._("Only approved versions can be frozen."))
+            version.budget_id._ensure_catalog_snapshot()
             version._sync_crossovered_budget()
             version.write(
                 {
@@ -407,6 +408,35 @@ class ConstructionBudgetVersion(models.Model):
             "view_mode": "form",
             "target": "new",
             "context": {"default_version_id": self.id},
+        }
+
+    def action_import_catalog_templates(self):
+        self.ensure_one()
+        if self.is_frozen:
+            raise UserError(
+                self.env._(
+                    "Frozen version '%(name)s' cannot import catalog templates.",
+                    name=self.display_name,
+                )
+            )
+        if not self.budget_id.catalog_version_id:
+            raise UserError(
+                self.env._(
+                    "Configure a catalog version on budget '%(budget)s' "
+                    "before importing.",
+                    budget=self.budget_id.display_name,
+                )
+            )
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Import Catalog Templates"),
+            "res_model": "construction.budget.import.catalog.template",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_version_id": self.id,
+                "default_chapter_id": self.chapter_ids[:1].id,
+            },
         }
 
     def write(self, vals):

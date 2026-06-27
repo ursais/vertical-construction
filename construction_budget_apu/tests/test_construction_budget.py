@@ -244,3 +244,66 @@ class TestConstructionBudgetApu(TransactionCase):
         new_version = self.env["construction.budget.version"].browse(action["res_id"])
         self.assertEqual(new_version.version_number, 2)
         self.assertEqual(len(new_version.line_ids), 1)
+
+    def test_import_catalog_template_and_snapshot(self):
+        catalog_version = self.env["construction.catalog.version"].create(
+            {
+                "name": "Budget Catalog",
+                "code": "BCAT-2025",
+                "date_start": "2025-01-01",
+                "state": "active",
+            }
+        )
+        concept = self.env["construction.catalog.concept"].create(
+            {
+                "catalog_version_id": catalog_version.id,
+                "code": "C100",
+                "name": "Imported concept",
+            }
+        )
+        catalog_input = self.env["construction.catalog.input"].create(
+            {
+                "catalog_version_id": catalog_version.id,
+                "code": "I100",
+                "name": "Imported input",
+                "input_type": "material",
+                "unit_cost": 5.0,
+            }
+        )
+        template = self.env["construction.catalog.template"].create(
+            {
+                "catalog_version_id": catalog_version.id,
+                "code": "T100",
+                "name": "Imported template",
+                "concept_id": concept.id,
+            }
+        )
+        self.env["construction.catalog.template.line"].create(
+            {
+                "template_id": template.id,
+                "input_id": catalog_input.id,
+                "quantity": 2.0,
+                "unit_cost": 5.0,
+            }
+        )
+        self.budget.catalog_version_id = catalog_version
+        wizard = self.env["construction.budget.import.catalog.template"].create(
+            {
+                "version_id": self.version.id,
+                "chapter_id": self.chapter.id,
+                "template_ids": [(6, 0, template.ids)],
+            }
+        )
+        wizard.action_import()
+        self.assertEqual(len(self.version.line_ids), 1)
+        line = self.version.line_ids
+        self.assertEqual(line.catalog_template_id, template)
+        self.assertAlmostEqual(line.unit_price, 10.0)
+        self.version.action_submit()
+        self.version.action_approve()
+        self.version.action_freeze()
+        self.assertTrue(self.budget.catalog_snapshot_id)
+        self.assertEqual(
+            self.budget.catalog_snapshot_id.catalog_version_id,
+            catalog_version,
+        )

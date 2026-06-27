@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_chapter_earthworks" model="construction.budget.chapter">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="code">01</field>
+        <field name="name">Earthworks</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="demo_chapter_structure" model="construction.budget.chapter">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="code">02</field>
+        <field name="name">Structure</field>
+        <field name="sequence">20</field>
+    </record>
+</odoo>

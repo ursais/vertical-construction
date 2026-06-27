@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_project_construction" model="project.project">
+        <field name="name">Demo Construction Site</field>
+        <field name="partner_id" ref="base.res_partner_12" />
+        <field name="account_id" ref="demo_analytic_account_construction" />
+    </record>
+</odoo>

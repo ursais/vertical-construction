@@ -73,6 +73,13 @@ class ConstructionBudgetLine(models.Model):
         help="When enabled, unit price is computed from the APU breakdown.",
     )
     notes = fields.Text()
+    catalog_template_id = fields.Many2one(
+        "construction.catalog.template",
+        string="Catalog Template",
+        copy=False,
+        readonly=True,
+        help="Source APU template when imported from the master catalog.",
+    )
     display_name = fields.Char(compute="_compute_display_name", store=True)
 
     @api.depends("code", "name")

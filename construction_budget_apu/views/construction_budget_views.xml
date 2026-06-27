@@ -95,6 +95,17 @@
                                 string="Acct. Budgets"
                             />
                         </button>
+                        <button
+                            name="action_view_catalog_snapshot"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-camera"
+                            invisible="not catalog_snapshot_id"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Catalog Snapshot</span>
+                            </div>
+                        </button>
                     </div>
                     <div class="oe_title">
                         <h1>
@@ -108,6 +119,8 @@
                             <field name="partner_id" />
                             <field name="analytic_account_id" />
                             <field name="default_budget_post_id" />
+                            <field name="catalog_version_id" />
+                            <field name="catalog_snapshot_id" />
                         </group>
                         <group>
                             <field name="current_version_id" />
