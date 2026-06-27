@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_catalog_crew_line_masonry" model="construction.catalog.crew.line">
+        <field name="crew_id" ref="demo_catalog_crew_masonry"/>
+        <field name="input_id" ref="demo_catalog_input_mason"/>
+        <field name="role">Mason</field>
+        <field name="quantity">3</field>
+        <field name="unit_cost">43.75</field>
+    </record>
+</odoo>
