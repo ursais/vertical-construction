@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_construction_catalog_root"
+        name="Construction Catalog"
+        groups="construction_master_catalog.group_construction_catalog_user"
+        sequence="40"/>
+
+    <menuitem id="menu_construction_catalog_versions"
+        name="Catalog Versions"
+        parent="menu_construction_catalog_root"
+        action="action_construction_catalog_version"
+        sequence="10"/>
+
+    <menuitem id="menu_construction_catalog_master"
+        name="Master Data"
+        parent="menu_construction_catalog_root"
+        sequence="20"/>
+
+    <menuitem id="menu_construction_catalog_concepts"
+        name="Concepts"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_concept"
+        sequence="10"/>
+
+    <menuitem id="menu_construction_catalog_inputs"
+        name="Inputs"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_input"
+        sequence="20"/>
+
+    <menuitem id="menu_construction_catalog_uoms"
+        name="Units"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_uom"
+        sequence="30"/>
+
+    <menuitem id="menu_construction_catalog_yields"
+        name="Yields"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_yield"
+        sequence="40"/>
+
+    <menuitem id="menu_construction_catalog_crews"
+        name="Crews"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_crew"
+        sequence="50"/>
+
+    <menuitem id="menu_construction_catalog_templates"
+        name="APU Templates"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_template"
+        sequence="60"/>
+
+    <menuitem id="menu_construction_catalog_concept_categories"
+        name="Concept Categories"
+        parent="menu_construction_catalog_master"
+        action="action_construction_catalog_concept_category"
+        sequence="70"/>
+
+    <menuitem id="menu_construction_catalog_snapshots"
+        name="Snapshots"
+        parent="menu_construction_catalog_root"
+        action="action_construction_catalog_snapshot"
+        sequence="30"/>
+</odoo>

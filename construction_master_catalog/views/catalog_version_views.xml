@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="construction_catalog_version_view_list" model="ir.ui.view">
+        <field name="name">construction.catalog.version.list</field>
+        <field name="model">construction.catalog.version</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'active'"
+                    decoration-muted="state == 'closed'"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="construction_catalog_version_view_form" model="ir.ui.view">
+        <field name="name">construction.catalog.version.form</field>
+        <field name="model">construction.catalog.version</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_activate" type="object" string="Activate"
+                        invisible="state != 'draft'" class="btn-primary"
+                        groups="construction_master_catalog.group_construction_catalog_manager"/>
+                    <button name="action_close" type="object" string="Close"
+                        invisible="state != 'active'"
+                        groups="construction_master_catalog.group_construction_catalog_manager"/>
+                    <button name="action_set_draft" type="object" string="Set to Draft"
+                        invisible="state != 'active'"
+                        groups="construction_master_catalog.group_construction_catalog_manager"/>
+                    <button name="action_create_snapshot" type="object" string="Create Snapshot"
+                        invisible="state != 'closed'"
+                        groups="construction_master_catalog.group_construction_catalog_manager"/>
+                    <button name="action_open_copy_wizard" type="object" string="Copy to New Version"
+                        invisible="state == 'draft'"
+                        groups="construction_master_catalog.group_construction_catalog_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_concepts" type="object" class="oe_stat_button" icon="fa-list">
+                            <field name="concept_count" widget="statinfo" string="Concepts"/>
+                        </button>
+                        <button name="action_view_inputs" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <field name="input_count" widget="statinfo" string="Inputs"/>
+                        </button>
+                        <button name="action_view_templates" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="template_count" widget="statinfo" string="Templates"/>
+                        </button>
+                        <button name="action_view_snapshots" type="object" class="oe_stat_button" icon="fa-camera">
+                            <field name="snapshot_count" widget="statinfo" string="Snapshots"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="state == 'closed'"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" readonly="state == 'closed'"/>
+                            <field name="date_start" readonly="state == 'closed'"/>
+                            <field name="date_end" readonly="state == 'closed'"/>
+                        </group>
+                        <group>
+                            <field name="previous_version_id"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state == 'closed'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="notes" readonly="state == 'closed'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="construction_catalog_version_view_search" model="ir.ui.view">
+        <field name="name">construction.catalog.version.search</field>
+        <field name="model">construction.catalog.version</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_active" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="filter_closed" string="Closed" domain="[('state', '=', 'closed')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_construction_catalog_version" model="ir.actions.act_window">
+        <field name="name">Catalog Versions</field>
+        <field name="res_model">construction.catalog.version</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

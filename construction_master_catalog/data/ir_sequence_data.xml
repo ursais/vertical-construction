@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_construction_catalog_version" model="ir.sequence">
+        <field name="name">Construction Catalog Version</field>
+        <field name="code">construction.catalog.version</field>
+        <field name="prefix">CAT-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

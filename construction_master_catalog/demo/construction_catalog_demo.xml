@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_catalog_version_2025" model="construction.catalog.version">
+        <field name="name">Catalog 2025</field>
+        <field name="code">CAT-2025</field>
+        <field name="date_start">2025-01-01</field>
+        <field name="state">active</field>
+    </record>
+
+    <record id="demo_catalog_concept_masonry" model="construction.catalog.concept">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">CON-001</field>
+        <field name="name">Masonry wall m2</field>
+        <field name="uom_id" ref="uom.uom_square_meter"/>
+    </record>
+
+    <record id="demo_catalog_input_cement" model="construction.catalog.input">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">INS-001</field>
+        <field name="name">Portland cement</field>
+        <field name="input_type">material</field>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="unit_cost">0.25</field>
+    </record>
+
+    <record id="demo_catalog_input_mason" model="construction.catalog.input">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">INS-002</field>
+        <field name="name">Mason journeyman</field>
+        <field name="input_type">labor</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="unit_cost">43.75</field>
+    </record>
+
+    <record id="demo_catalog_crew_masonry" model="construction.catalog.crew">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">CRW-001</field>
+        <field name="name">Masonry crew</field>
+    </record>
+
+    <record id="demo_catalog_crew_line_masonry" model="construction.catalog.crew.line">
+        <field name="crew_id" ref="demo_catalog_crew_masonry"/>
+        <field name="input_id" ref="demo_catalog_input_mason"/>
+        <field name="role">Mason</field>
+        <field name="quantity">3</field>
+        <field name="unit_cost">43.75</field>
+    </record>
+
+    <record id="demo_catalog_yield_masonry" model="construction.catalog.yield">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="concept_id" ref="demo_catalog_concept_masonry"/>
+        <field name="crew_id" ref="demo_catalog_crew_masonry"/>
+        <field name="yield_quantity">12.0</field>
+        <field name="resource_quantity">1.0</field>
+    </record>
+
+    <record id="demo_catalog_template_masonry" model="construction.catalog.template">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">TPL-001</field>
+        <field name="name">Masonry wall APU</field>
+        <field name="concept_id" ref="demo_catalog_concept_masonry"/>
+    </record>
+
+    <record id="demo_catalog_template_line_cement" model="construction.catalog.template.line">
+        <field name="template_id" ref="demo_catalog_template_masonry"/>
+        <field name="input_id" ref="demo_catalog_input_cement"/>
+        <field name="quantity">8.0</field>
+        <field name="unit_cost">0.25</field>
+        <field name="waste_percent">5.0</field>
+    </record>
+
+    <record id="demo_catalog_template_line_labor" model="construction.catalog.template.line">
+        <field name="template_id" ref="demo_catalog_template_masonry"/>
+        <field name="input_id" ref="demo_catalog_input_mason"/>
+        <field name="quantity">0.25</field>
+        <field name="unit_cost">43.75</field>
+    </record>
+</odoo>
