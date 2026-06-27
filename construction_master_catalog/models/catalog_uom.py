@@ -15,8 +15,9 @@ class ConstructionCatalogUom(models.Model):
         required=True,
         ondelete="restrict",
     )
-    uom_category_id = fields.Many2one(
-        related="uom_id.category_id",
+    uom_relative_uom_id = fields.Many2one(
+        related="uom_id.relative_uom_id",
+        string="Reference UoM",
         store=True,
         readonly=True,
     )

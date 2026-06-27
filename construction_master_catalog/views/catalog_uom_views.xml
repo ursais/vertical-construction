@@ -26,7 +26,7 @@
                         <field name="name" readonly="version_state == 'closed'"/>
                         <field name="catalog_version_id" readonly="version_state == 'closed'"/>
                         <field name="uom_id" readonly="version_state == 'closed'"/>
-                        <field name="uom_category_id"/>
+                        <field name="uom_relative_uom_id"/>
                         <field name="factor" readonly="version_state == 'closed'"/>
                         <field name="active" readonly="version_state == 'closed'"/>
                     </group>
