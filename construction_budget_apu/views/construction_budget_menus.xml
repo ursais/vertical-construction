@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="project_project_view_form_inherit_construction_budget"
+        model="ir.ui.view"
+    >
+        <field name="name">project.project.form.construction.budget</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_construction_budgets"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-calculator"
+                    invisible="construction_budget_count == 0"
+                >
+                    <field
+                        name="construction_budget_count"
+                        widget="statinfo"
+                        string="Budgets"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_construction_budget_root"
+        name="Construction Budgets"
+        groups="construction_budget_apu.group_construction_budget_user"
+        sequence="45"
+    />
+
+    <menuitem
+        id="menu_construction_budget"
+        name="Budgets"
+        parent="menu_construction_budget_root"
+        action="action_construction_budget"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_construction_budget_versions"
+        name="Versions"
+        parent="menu_construction_budget_root"
+        action="action_construction_budget_version"
+        sequence="20"
+    />
+</odoo>

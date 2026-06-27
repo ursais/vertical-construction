@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_analytic_account_construction" model="account.analytic.account">
+        <field name="name">Demo Construction Project</field>
+        <field name="plan_id" ref="analytic.analytic_plan_projects" />
+    </record>
+
+    <record id="demo_project_construction" model="project.project">
+        <field name="name">Demo Construction Site</field>
+        <field name="partner_id" ref="base.res_partner_12" />
+        <field name="account_id" ref="demo_analytic_account_construction" />
+    </record>
+
+    <record id="demo_budget" model="construction.budget">
+        <field name="code">DEMO-001</field>
+        <field name="project_id" ref="demo_project_construction" />
+        <field name="analytic_account_id" ref="demo_analytic_account_construction" />
+        <field name="state">active</field>
+    </record>
+
+    <record id="demo_budget_version_1" model="construction.budget.version">
+        <field name="budget_id" ref="demo_budget" />
+        <field name="version_number">1</field>
+        <field name="name">Initial Version</field>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_chapter_earthworks" model="construction.budget.chapter">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="code">01</field>
+        <field name="name">Earthworks</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="demo_chapter_structure" model="construction.budget.chapter">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="code">02</field>
+        <field name="name">Structure</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="demo_apu_excavation" model="construction.budget.apu">
+        <field name="name">Excavation APU</field>
+    </record>
+
+    <record id="demo_apu_component_labor" model="construction.budget.apu.component">
+        <field name="apu_id" ref="demo_apu_excavation" />
+        <field name="name">Operator</field>
+        <field name="component_type">labor</field>
+        <field name="quantity">8</field>
+        <field name="unit_cost">25</field>
+    </record>
+
+    <record id="demo_apu_component_equipment" model="construction.budget.apu.component">
+        <field name="apu_id" ref="demo_apu_excavation" />
+        <field name="name">Backhoe rental</field>
+        <field name="component_type">equipment</field>
+        <field name="quantity">1</field>
+        <field name="unit_cost">120</field>
+    </record>
+
+    <record id="demo_line_excavation" model="construction.budget.line">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="chapter_id" ref="demo_chapter_earthworks" />
+        <field name="code">01.01</field>
+        <field name="name">Excavation and removal</field>
+        <field name="quantity">100</field>
+        <field name="apu_id" ref="demo_apu_excavation" />
+    </record>
+
+    <record id="demo_line_concrete" model="construction.budget.line">
+        <field name="version_id" ref="demo_budget_version_1" />
+        <field name="chapter_id" ref="demo_chapter_structure" />
+        <field name="code">02.01</field>
+        <field name="name">Concrete foundation</field>
+        <field name="quantity">50</field>
+        <field name="apu_mode">False</field>
+        <field name="unit_price">180</field>
+    </record>
+</odoo>

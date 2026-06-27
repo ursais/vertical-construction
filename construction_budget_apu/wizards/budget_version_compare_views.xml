@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="construction_budget_version_compare_view_form" model="ir.ui.view">
+        <field name="name">construction.budget.version.compare.form</field>
+        <field name="model">construction.budget.version.compare</field>
+        <field name="arch" type="xml">
+            <form string="Compare Budget Versions">
+                <group>
+                    <field name="budget_id" readonly="1" />
+                    <field name="version_a_id" />
+                    <field name="version_b_id" />
+                    <field name="amount_total_a" />
+                    <field name="amount_total_b" />
+                    <field name="amount_delta" />
+                    <field name="amount_delta_percent" />
+                </group>
+                <button
+                    name="action_generate"
+                    string="Generate Comparison"
+                    type="object"
+                    class="btn-primary"
+                />
+                <field name="line_ids" readonly="1">
+                    <list
+                        decoration-success="change_type == 'added'"
+                        decoration-danger="change_type == 'removed'"
+                        decoration-warning="change_type == 'modified'"
+                    >
+                        <field name="chapter_code" />
+                        <field name="line_code" />
+                        <field name="chapter_name" />
+                        <field name="line_name" />
+                        <field name="quantity_a" />
+                        <field name="quantity_b" />
+                        <field name="unit_price_a" />
+                        <field name="unit_price_b" />
+                        <field name="subtotal_a" sum="Base Total" />
+                        <field name="subtotal_b" sum="Compare Total" />
+                        <field name="subtotal_delta" sum="Delta" />
+                        <field name="change_type" />
+                    </list>
+                </field>
+                <footer>
+                    <button string="Close" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_construction_budget_version_compare"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Compare Versions</field>
+        <field name="res_model">construction.budget.version.compare</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
