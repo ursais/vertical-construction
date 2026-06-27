@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_construction_catalog">
+        <field name="name">Construction Catalog</field>
+    </record>
+
+    <record model="res.groups.privilege" id="res_groups_privilege_construction_catalog">
+        <field name="name">Construction Catalog</field>
+        <field name="category_id" ref="module_category_construction_catalog"/>
+    </record>
+
+    <record id="group_construction_catalog_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="res_groups_privilege_construction_catalog"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <record id="group_construction_catalog_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="privilege_id" ref="res_groups_privilege_construction_catalog"/>
+        <field name="implied_ids" eval="[(4, ref('group_construction_catalog_user'))]"/>
+        <field
+            name="user_ids"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+    </record>
+
+    <record id="construction_catalog_version_comp_rule" model="ir.rule">
+        <field name="name">Construction Catalog Version multi-company</field>
+        <field name="model_id" ref="model_construction_catalog_version"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="construction_catalog_snapshot_comp_rule" model="ir.rule">
+        <field name="name">Construction Catalog Snapshot multi-company</field>
+        <field name="model_id" ref="model_construction_catalog_snapshot"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

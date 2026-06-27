@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_catalog_template_masonry" model="construction.catalog.template">
+        <field name="catalog_version_id" ref="demo_catalog_version_2025"/>
+        <field name="code">TPL-001</field>
+        <field name="name">Masonry wall APU</field>
+        <field name="concept_id" ref="demo_catalog_concept_masonry"/>
+    </record>
+</odoo>

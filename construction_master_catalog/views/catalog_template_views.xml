@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="construction_catalog_template_view_list" model="ir.ui.view">
+        <field name="name">construction.catalog.template.list</field>
+        <field name="model">construction.catalog.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="concept_id"/>
+                <field name="unit_price"/>
+                <field name="catalog_version_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="construction_catalog_template_view_form" model="ir.ui.view">
+        <field name="name">construction.catalog.template.form</field>
+        <field name="model">construction.catalog.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="version_state" invisible="1"/>
+                    <group>
+                        <field name="code" readonly="version_state == 'closed'"/>
+                        <field name="name" readonly="version_state == 'closed'"/>
+                        <field name="concept_id" readonly="version_state == 'closed'"/>
+                        <field name="catalog_version_id" readonly="version_state == 'closed'"/>
+                        <field name="uom_id"/>
+                        <field name="unit_price" readonly="1"/>
+                        <field name="amount_material" readonly="1"/>
+                        <field name="amount_labor" readonly="1"/>
+                        <field name="amount_equipment" readonly="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Components" name="components">
+                            <field name="line_ids" readonly="version_state == 'closed'">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="input_id"/>
+                                    <field name="input_type"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="waste_percent"/>
+                                    <field name="effective_quantity"/>
+                                    <field name="unit_cost"/>
+                                    <field name="subtotal" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" readonly="version_state == 'closed'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_construction_catalog_template" model="ir.actions.act_window">
+        <field name="name">APU Templates</field>
+        <field name="res_model">construction.catalog.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

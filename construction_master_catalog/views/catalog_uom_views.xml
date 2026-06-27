@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="construction_catalog_uom_view_list" model="ir.ui.view">
+        <field name="name">construction.catalog.uom.list</field>
+        <field name="model">construction.catalog.uom</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="uom_id"/>
+                <field name="factor"/>
+                <field name="catalog_version_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="construction_catalog_uom_view_form" model="ir.ui.view">
+        <field name="name">construction.catalog.uom.form</field>
+        <field name="model">construction.catalog.uom</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="version_state" invisible="1"/>
+                    <group>
+                        <field name="code" readonly="version_state == 'closed'"/>
+                        <field name="name" readonly="version_state == 'closed'"/>
+                        <field name="catalog_version_id" readonly="version_state == 'closed'"/>
+                        <field name="uom_id" readonly="version_state == 'closed'"/>
+                        <field name="uom_relative_uom_id"/>
+                        <field name="factor" readonly="version_state == 'closed'"/>
+                        <field name="active" readonly="version_state == 'closed'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_construction_catalog_uom" model="ir.actions.act_window">
+        <field name="name">Construction Units</field>
+        <field name="res_model">construction.catalog.uom</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
